@@ -11,6 +11,8 @@ function mergeSort (list = []) {
     let left = list.splice(0, halfWay);
     let right = list.splice(halfWay);
 
+    // TODO: This is a terrible potential source of a stack overflow
+    // TODO: Is there a tail optimized way to right this so we can switch over to setTimeout(mergeSort, 0)?
     // Recursively sort both sublists.
     left = mergeSort(left);
     right = mergeSort(right);
@@ -23,21 +25,21 @@ function merge (left, right) {
     var result = [];
 
     while (left.length && right.length) {
-        if first(left) ≤ first(right) then
-            append first(left) to result
-            left := rest(left) ==
-        else
-            append first(right) to result
-            right := rest(right)
+        if (left[0] <= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
     }
 
     // Either left or right may have elements left; consume them.
     // (Only one of the following loops will actually be entered.)
-    while left is not empty do
-        append first(left) to result
-        left := rest(left)
-    while right is not empty do
-        append first(right) to result
-        right := rest(right)
+    while (left.length) {
+        result.push(left.shift());
+    }
+    while (right.length) {
+        result.push(right.shift());
+    }
+
     return result
 }
