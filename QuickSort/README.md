@@ -1,3 +1,3 @@
-# Merge Sort
+# QuickSort
 
-Add your quick-sort code in this directory.
+Add your quicksort code in this directory.
