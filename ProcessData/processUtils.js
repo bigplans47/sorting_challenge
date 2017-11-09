@@ -1,12 +1,21 @@
 function transformRiderArrays (riders) {
-    return rider.map(r => {
-        return {
-            id: r[0],
-            firstName: r[1],
-            lastName: r[2],
-            weight: r[3],
-            age: r[4],
+    // return riders.map(function (r) {
+    return riders.map(rider => {
+        const hasGender = rider.length === 6;
+        const baseRider = {
+            id: rider[0],
+            firstName: rider[1],
+            lastName: rider[2],
+        };
+        if (hasGender) {
+            baseRider.gender = rider[3];
+            baseRider.weight = rider[4];
+            baseRider.age = rider[5];
+        } else {
+            baseRider.weight = rider[3];
+            baseRider.age = rider[4];
         }
+        return baseRider;
     })
 }
 
